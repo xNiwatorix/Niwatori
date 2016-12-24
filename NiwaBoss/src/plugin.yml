@@ -1,0 +1,6 @@
+name: NiwaBoss
+main: bp.niwatori.niwaboss.NiwaBoss
+version: 1.0.0
+author: xNiwatorix
+commands:
+  spawnBoss:
