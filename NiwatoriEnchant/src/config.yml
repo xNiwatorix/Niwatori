@@ -1,0 +1,6 @@
+#Default config.yml
+warnMessage: "&4!!!!!WARNING!!!!!!"
+mods:
+  - Custom,test1,30,hanage,b
+  - Custom,delete,30,hanage,b
+  #-Label,ModName,Probability,Command,ColorCode
