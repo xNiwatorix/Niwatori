@@ -1,13 +1,10 @@
-package bp.niwatori.niwaboss;
+package bp.niwatori.niwaboss.bosses;
 
-import bp.niwatori.niwaboss.skills.LaunchArrow;
 import bp.niwatori.niwaboss.skills.LaunchKnockBackBall;
 import bp.niwatori.niwaboss.skills.NothingSkill;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -17,9 +14,8 @@ import org.bukkit.potion.PotionEffectType;
  */
 public class VeryKurusimimas extends Boss{
     public VeryKurusimimas(Location spawnLocation){
-        entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE);
-        entity.setCustomNameVisible(true);
-        entity.getEquipment().setHelmet(new ItemStack(Material.ROTTEN_FLESH));
+        super(EntityType.ZOMBIE,spawnLocation);
+        entity.getEquipment().setHelmet(new ItemStack(Material.APPLE));
         entity.setMaxHealth(2048);
         entity.setHealth(2048);
         entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,3600*20,5,true));

@@ -1,6 +1,6 @@
 package bp.niwatori.niwaboss.skills;
 
-import bp.niwatori.niwaboss.Boss;
+import bp.niwatori.niwaboss.bosses.Boss;
 import org.bukkit.entity.Arrow;
 
 /**

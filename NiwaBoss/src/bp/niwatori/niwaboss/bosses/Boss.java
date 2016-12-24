@@ -1,6 +1,8 @@
-package bp.niwatori.niwaboss;
+package bp.niwatori.niwaboss.bosses;
 
 import bp.niwatori.niwaboss.skills.Skill;
+import org.bukkit.Location;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -24,10 +26,13 @@ public abstract class Boss extends BukkitRunnable{
     }
 
     public LivingEntity getEntity() {
-
         return entity;
     }
 
+    public Boss(EntityType type,Location location){
+        entity = (LivingEntity) location.getWorld().spawnEntity(location,type);
+        entity.setCustomNameVisible(true);
+    }
     protected void refreshHP(String bossName){
         String name = bossName.concat("[");
         double percent = Math.ceil(entity.getHealth()/entity.getMaxHealth()*10);
