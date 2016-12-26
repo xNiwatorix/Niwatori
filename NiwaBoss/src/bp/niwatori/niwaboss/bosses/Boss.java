@@ -11,9 +11,9 @@ import java.util.Random;
 
 /**
  * Created by xNiwatorix on 2016/12/23.
- * サブクラスのコンストラクタでしなきゃいけないこと
- * ・Skillの追加
- * ・HPの設定(変える場合は)
+ * サブクラスのコンストラクタの引数はLocationの一つのみにしなくてはならない.
+ * サブクラスでは、Skillの追加の記述だけしとけばとりあえず動きます.
+ * 他のことしたい場合はSuperZombieクラス辺りが参考になります.
  */
 public abstract class Boss extends BukkitRunnable{
     protected  LivingEntity entity;
