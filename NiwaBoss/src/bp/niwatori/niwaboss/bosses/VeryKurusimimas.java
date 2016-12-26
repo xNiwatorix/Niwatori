@@ -14,21 +14,10 @@ import org.bukkit.potion.PotionEffectType;
  */
 public class VeryKurusimimas extends Boss{
     public VeryKurusimimas(Location spawnLocation){
-        super(EntityType.ZOMBIE,spawnLocation);
+        super(EntityType.ZOMBIE,spawnLocation,100,"クリスマスが今年もやってくる");
         entity.getEquipment().setHelmet(new ItemStack(Material.APPLE));
-        entity.setMaxHealth(2048);
-        entity.setHealth(2048);
         entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,3600*20,5,true));
         skills.add(new LaunchKnockBackBall());
         skills.add(new NothingSkill(6));
-    }
-    @Override
-    public void run(){
-        if(entity.isDead()){
-            this.cancel();
-            return;
-        }
-        refreshHP("クリスマスが今年もやってくる");
-        launchSkill();
     }
 }

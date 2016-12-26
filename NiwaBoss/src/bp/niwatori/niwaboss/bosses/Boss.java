@@ -12,14 +12,14 @@ import java.util.Random;
 /**
  * Created by xNiwatorix on 2016/12/23.
  * サブクラスのコンストラクタでしなきゃいけないこと
- * ・entityの初期化
- * ・skillsの初期化,Skillの追加
- * ・entityのCustomNameVisible = trueに
+ * ・Skillの追加
+ * ・HPの設定(変える場合は)
  */
 public abstract class Boss extends BukkitRunnable{
     protected  LivingEntity entity;
     protected ArrayList<Skill> skills = new ArrayList<>();
     protected  boolean isSkillReady =true;
+    protected String name = new String();
 
     public void setSkillReady(boolean skillReady) {
         isSkillReady = skillReady;
@@ -29,9 +29,12 @@ public abstract class Boss extends BukkitRunnable{
         return entity;
     }
 
-    public Boss(EntityType type,Location location){
+    public Boss(EntityType type,Location location,int hp,String name){
         entity = (LivingEntity) location.getWorld().spawnEntity(location,type);
         entity.setCustomNameVisible(true);
+        entity.setMaxHealth(hp);
+        entity.setHealth(hp);
+        this.name = name;
     }
     protected void refreshHP(String bossName){
         String name = bossName.concat("[");
@@ -52,5 +55,14 @@ public abstract class Boss extends BukkitRunnable{
             isSkillReady = false;
             skills.get(slot).launch(this);
         }
+    }
+    @Override
+    public void run() {
+        if(entity.isDead()){
+            this.cancel();
+            return;
+        }
+        refreshHP(name);
+        launchSkill();
     }
 }

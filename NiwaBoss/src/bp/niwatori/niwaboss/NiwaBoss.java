@@ -41,7 +41,7 @@ public class NiwaBoss extends JavaPlugin{
             try {
                 World world = Bukkit.getWorld(args[1]);
                 Location location = new Location(world, Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]));
-                Class<? extends Boss> clazz = Class.forName("bp.niwatori.niwaboss."+args[0]).asSubclass(Boss.class);
+                Class<? extends Boss> clazz = Class.forName("bp.niwatori.niwaboss.bosses."+args[0]).asSubclass(Boss.class);
                 Boss boss = clazz.getConstructor(Location.class).newInstance(location);
                 boss.runTaskTimer(this,0,2);
             }catch(ClassNotFoundException exception){

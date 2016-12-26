@@ -10,17 +10,8 @@ import org.bukkit.entity.EntityType;
  */
 public class SuperSkeleton extends Boss{
     public SuperSkeleton(Location spawnLocation){
-        super(EntityType.SKELETON,spawnLocation);
+        super(EntityType.SKELETON,spawnLocation,100,"SuperSkeleton");
         skills.add(new LaunchArrow());
         skills.add(new NothingSkill(5));
-    }
-    @Override
-    public void run(){
-        if(entity.isDead()){
-            this.cancel();
-            return;
-        }
-        refreshHP("SuperSkeleton");
-        launchSkill();
     }
 }
