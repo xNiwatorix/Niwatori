@@ -128,11 +128,13 @@ public class EnchantTableListener implements Listener{
      */
     @EventHandler
     public  void onGuiDrag(InventoryDragEvent event){
-        event.getRawSlots().forEach(slotnum->{
-            if(slotnum==2||slotnum==3||slotnum==4){
-                event.setCancelled(true);
-            }
-        });
+        if(event.getView().getType().equals(InventoryType.HOPPER)) {
+            event.getRawSlots().forEach(slotnum -> {
+                if (slotnum == 2 || slotnum == 3 || slotnum == 4) {
+                    event.setCancelled(true);
+                }
+            });
+        }
     }
     /**
      * アイテムにModを付ける処理
