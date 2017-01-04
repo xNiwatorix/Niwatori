@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -122,7 +123,17 @@ public class EnchantTableListener implements Listener{
             }
         }
     }
-
+    /**
+     * ドラッグしながら4スロに置くとおけちゃう問題を回避
+     */
+    @EventHandler
+    public  void onGuiDrag(InventoryDragEvent event){
+        event.getRawSlots().forEach(slotnum->{
+            if(slotnum==2||slotnum==3||slotnum==4){
+                event.setCancelled(true);
+            }
+        });
+    }
     /**
      * アイテムにModを付ける処理
      * @param inventoryView ホッパーのInventoryView
@@ -158,6 +169,7 @@ public class EnchantTableListener implements Listener{
             }
         }
         itemMeta.setLore(itemLore);
+        itemMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS,0,true);
         item.setItemMeta(itemMeta);
         if(mod.getName().equalsIgnoreCase("delete")){
             item = new ItemStack(Material.AIR);
@@ -188,9 +200,22 @@ public class EnchantTableListener implements Listener{
          */
         private ItemStack rename(ItemStack item,String name){
             ItemMeta meta = item.getItemMeta();
-            ArrayList<String> lore = new ArrayList<>();
-            lore.add(name);
+            List<String> lore;
+            if(meta.hasLore()){
+                lore = meta.getLore();
+            }else{
+                lore = new ArrayList<>();
+            }
+            if(lore.size()>=2){
+                lore.set(1,name);
+            }else if(lore.size()==1){
+                lore.add(name);
+            }else if(lore.size()==0){
+                lore.add("");
+                lore.add(name);
+            }
             meta.setLore(lore);
+            meta.addEnchant(Enchantment.LOOT_BONUS_MOBS,0,true);
             ItemStack result = item.getData().toItemStack(1);
             result.setItemMeta(meta);
             return result;
