@@ -176,7 +176,9 @@ public class EnchantTableListener implements Listener{
         if(mod.getName().equalsIgnoreCase("delete")){
             item = new ItemStack(Material.AIR);
         }
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), mod.getCommand());
+        String command = mod.getCommand();
+        command = command.replaceAll("%player%",inventoryView.getPlayer().getName());
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
         return item;
     }
     private class setSample extends BukkitRunnable{
